@@ -40,10 +40,11 @@ const FileUpload = ({ onAnalysisComplete }) => {
             const data = await uploadApi(file);
             setProgress(100);
             setTimeout(() => {
-                onAnalysisComplete(data.analysis);
+                onAnalysisComplete(data.reply || data.analysis || "Document analyzed successfully.");
                 setIsUploading(false);
             }, 500);
         } catch (err) {
+            console.error("Upload error:", err);
             setError("Upload failed. Please try again.");
             setIsUploading(false);
         } finally {

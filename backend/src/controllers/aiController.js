@@ -32,24 +32,39 @@ exports.handleUpload = async (req, res, next) => {
 
     try {
         let text = '';
+
         if (req.file.mimetype === 'application/pdf') {
-            const data = await pdf(req.file.buffer);
-            text = data.text;
+            try {
+                const data = await pdf(req.file.buffer);
+                text = data.text;
+            } catch (pdfError) {
+                console.warn('PDF parse failed, using raw text:', pdfError.message);
+                text = req.file.buffer.toString('utf-8').replace(/[^\x20-\x7E\n]/g, ' ');
+            }
         } else {
-            text = req.file.buffer.toString();
+            text = req.file.buffer.toString('utf-8');
         }
 
-        // Default agent behavior for uploads: Summarize and Extract Tasks
-        const result = await workflowService.executeAgentWorkflow("Analyze this document and create tasks", text);
+        if (!text || text.trim().length < 10) {
+            text = `Document uploaded: ${req.file.originalname}. Please analyze this file.`;
+        }
+
+        const result = await workflowService.executeAgentWorkflow(
+            "Summarize this document and create tasks",
+            text
+        );
 
         res.json({
             filename: req.file.originalname,
+            analysis: result.reply,
             ...result
         });
     } catch (error) {
+        console.error('Upload handler error:', error);
         next(error);
     }
 };
+
 
 exports.getTasks = async (req, res, next) => {
     try {
