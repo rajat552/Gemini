@@ -29,6 +29,17 @@ const ChatWindow = ({ onWorkflowStart, onWorkflowComplete }) => {
         setInput('');
     };
 
+    const handleVoiceSend = async (transcript) => {
+        if (!transcript.trim()) return;
+        
+        if (onWorkflowStart) onWorkflowStart();
+        const result = await sendMessage(transcript);
+
+        if (result && onWorkflowComplete) {
+            onWorkflowComplete(result);
+        }
+    };
+
     const handleKeyPress = (e) => {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
@@ -61,7 +72,7 @@ const ChatWindow = ({ onWorkflowStart, onWorkflowComplete }) => {
             <div className="p-6 bg-app-bg/80 backdrop-blur-md border-t border-border-subtle transition-colors duration-300">
                 <div className="flex items-center gap-4 bg-card-bg border border-border-subtle rounded-[2rem] p-3 focus-within:border-primary/50 transition-all shadow-xl shadow-black/5 hover:shadow-black/10">
                     <div className="px-2">
-                        <VoiceInput onResult={(transcript) => sendMessage(transcript)} />
+                        <VoiceInput onResult={handleVoiceSend} />
                     </div>
 
                     <textarea

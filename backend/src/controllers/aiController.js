@@ -42,6 +42,11 @@ exports.handleChat = async (req, res, next) => {
         return successResponse(res, result);
     } catch (error) {
         console.error('[CHAT]: Error in handleChat:', error);
+        
+        if (error.message?.includes('API_QUOTA_EXCEEDED')) {
+            return errorResponse(res, error.message, 429);
+        }
+        
         next(error);
     }
 };
@@ -83,6 +88,11 @@ exports.handleUpload = async (req, res, next) => {
         });
     } catch (error) {
         console.error('Upload handler error:', error);
+        
+        if (error.message?.includes('API_QUOTA_EXCEEDED')) {
+            return errorResponse(res, error.message, 429);
+        }
+        
         next(error);
     }
 };

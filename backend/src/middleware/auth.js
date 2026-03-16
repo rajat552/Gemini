@@ -9,7 +9,6 @@ const auth = (req, res, next) => {
         // If in development and no token, we can optionally bypass for demo
         if (process.env.NODE_ENV === 'development') {
             req.user = { id: 'demo-user', name: 'Demo User' };
-            console.log('⚠️ [AUTH]: Dev mode - bypassing authentication with demo-user');
             return next();
         }
         return res.status(401).json({ error: 'No token, authorization denied' });

@@ -40,8 +40,8 @@ const Dashboard = () => {
     };
 
     return (
-        <div className="pt-24 min-h-screen bg-app-bg transition-colors duration-300">
-            <div className="max-w-[1800px] mx-auto grid lg:grid-cols-4 gap-8 h-[calc(100vh-10rem)] px-10">
+        <div className="pt-24 flex-grow flex flex-col bg-app-bg transition-colors duration-300">
+            <div className="max-w-[1800px] mx-auto grid lg:grid-cols-4 gap-8 flex-grow px-10 pb-10">
 
                 {/* Chat - Main Interaction (Takes 2 cols) */}
                 <div className="lg:col-span-2 flex flex-col gap-6">

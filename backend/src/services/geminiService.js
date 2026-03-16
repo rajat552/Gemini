@@ -52,6 +52,12 @@ class GeminiService {
             
         } catch (error) {
             console.error("Gemini API Error:", error.message);
+            
+            // Check if it's a rate limit or quota exceeded error
+            if (error.status === 429 || error.message.includes("429") || error.message.includes("Quota exceeded") || error.message.includes("quota")) {
+                throw new Error("API_QUOTA_EXCEEDED: You have exceeded your Gemini free tier API quota. Please try again later or check your API billing.");
+            }
+
             console.log("⚠️ API Call failed... Running in Demo Mode.");
             return this.getMockResponse(prompt);
         }

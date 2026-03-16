@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import TaskCard from '../components/TaskCard';
-import { Plus, Filter, SortAsc, LayoutGrid, CheckSquare, X } from 'lucide-react';
+import { Plus, Filter, SortAsc, LayoutGrid, CheckSquare, X, List } from 'lucide-react';
 import { getTasks, createTask, toggleTaskStatus, deleteTask } from '../services/api';
 import { motion } from 'framer-motion';
 
@@ -10,6 +10,8 @@ const TaskManager = () => {
     const [newTitle, setNewTitle] = useState('');
     const [newDescription, setNewDescription] = useState('');
     const [taskToDelete, setTaskToDelete] = useState(null);
+    const [filter, setFilter] = useState('all');
+    const [isGridView, setIsGridView] = useState(true);
 
     const fetchTasks = async () => {
         const data = await getTasks();
@@ -45,6 +47,17 @@ const TaskManager = () => {
         fetchTasks();
     };
 
+    const handleFilterToggle = () => {
+        setFilter(prev => prev === 'all' ? 'pending' : prev === 'pending' ? 'completed' : 'all');
+    };
+
+    const filteredTasks = tasks.filter(task => {
+        const isCompleted = task.status === 'completed' || task.status === 'done';
+        if (filter === 'completed') return isCompleted;
+        if (filter === 'pending') return !isCompleted;
+        return true;
+    });
+
     return (
         <div className="pt-32 max-w-6xl mx-auto px-6 pb-20">
             <header className="flex flex-col md:flex-row items-end md:items-center justify-between gap-6 mb-12">
@@ -59,11 +72,17 @@ const TaskManager = () => {
                 </div>
 
                 <div className="flex items-center gap-3">
-                    <button className="flex items-center gap-2 px-5 py-3 bg-white/5 border border-white/10 rounded-2xl text-xs font-bold hover:bg-white/10 transition-all uppercase tracking-widest">
-                        <Filter size={16} /> Filter
+                    <button 
+                        onClick={handleFilterToggle}
+                        className="flex items-center gap-2 px-5 py-3 bg-white/5 border border-white/10 rounded-2xl text-xs font-bold hover:bg-white/10 transition-all uppercase tracking-widest"
+                    >
+                        <Filter size={16} /> {filter === 'all' ? 'Filter' : filter}
                     </button>
-                    <button className="flex items-center gap-2 px-5 py-3 bg-white/5 border border-white/10 rounded-2xl text-xs font-bold hover:bg-white/10 transition-all uppercase tracking-widest">
-                        <LayoutGrid size={16} /> Grid
+                    <button 
+                        onClick={() => setIsGridView(!isGridView)}
+                        className="flex items-center gap-2 px-5 py-3 bg-white/5 border border-white/10 rounded-2xl text-xs font-bold hover:bg-white/10 transition-all uppercase tracking-widest"
+                    >
+                        {isGridView ? <><List size={16} /> List</> : <><LayoutGrid size={16} /> Grid</>}
                     </button>
                     <button
                         onClick={() => setShowModal(true)}
@@ -74,8 +93,8 @@ const TaskManager = () => {
                 </div>
             </header>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {tasks.map((task, idx) => (
+            <div className={`grid ${isGridView ? 'md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'} gap-6`}>
+                {filteredTasks.map((task, idx) => (
                     <motion.div
                         key={task.id || idx}
                         initial={{ opacity: 0, scale: 0.95 }}

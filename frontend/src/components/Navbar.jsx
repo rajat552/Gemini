@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Bot, Home, LayoutDashboard, FileText, CheckSquare, Settings } from 'lucide-react';
+import { Bot, Home, LayoutDashboard, FileText, CheckSquare } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import Toggle from './Toggle';
 
@@ -47,9 +47,7 @@ const Navbar = () => {
             <div className="flex items-center gap-6">
                 <Toggle isOn={isDarkMode} onToggle={toggleTheme} />
 
-                <button className="text-text-muted hover:text-primary transition-colors">
-                    <Settings size={20} />
-                </button>
+
                 <div className="w-10 h-10 rounded-full border-2 border-primary/50 p-0.5">
                     <div className="w-full h-full rounded-full bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center text-[10px] font-bold text-white">
                         USER

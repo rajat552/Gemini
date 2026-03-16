@@ -21,7 +21,19 @@ export const useChat = () => {
             setMessages(prev => [...prev, assistantMsg]);
             return data;
         } catch (error) {
-            setMessages(prev => [...prev, { role: 'assistant', content: 'Error: Could not reach the AI server.' }]);
+            let errorMessage = 'Error: Could not reach the AI server.';
+            
+            const responseError = error.response?.data?.error || error.response?.data?.message || '';
+
+            if (responseError.includes('API_QUOTA_EXCEEDED')) {
+                errorMessage = '⚠️ Gemini API Quota Exceeded. Please try again later or check your Google Cloud billing.';
+            } else if (error.message?.includes('API_QUOTA_EXCEEDED')) {
+                errorMessage = '⚠️ Gemini API Quota Exceeded. Please try again later or check your Google Cloud billing.';
+            } else if (error.response?.status === 429) {
+                errorMessage = '⚠️ API Rate Limit Exceeded. Please slow down and try again.';
+            }
+
+            setMessages(prev => [...prev, { role: 'assistant', content: errorMessage }]);
             return null;
         } finally {
             setLoading(false);
