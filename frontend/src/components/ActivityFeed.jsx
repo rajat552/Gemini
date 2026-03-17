@@ -11,7 +11,7 @@ const ActivityFeed = ({ logs = [], isRunning }) => {
                 </div>
                 <div>
                     <h2 className="text-xl font-black tracking-tight text-text-main">Activity</h2>
-                    <p className="text-[10px] text-text-muted font-bold uppercase tracking-widest -mt-1">Nova Act Live</p>
+                    <p className="text-[10px] text-text-muted font-bold uppercase tracking-widest -mt-1">Gemini Act Live</p>
                 </div>
             </div>
 

@@ -11,7 +11,7 @@ const DocumentUpload = () => {
             <header className="text-center mb-16">
                 <h1 className="text-5xl font-black mb-4">Document Intelligence</h1>
                 <p className="text-gray-500 text-lg max-w-xl mx-auto">
-                    Upload project documents or notes and let Nova extract architecture, action items, and hidden insights.
+                    Upload project documents or notes and let Gemini extract architecture, action items, and hidden insights.
                 </p>
             </header>
 

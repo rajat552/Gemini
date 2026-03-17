@@ -39,7 +39,7 @@ const Home = () => {
                         transition={{ delay: 0.2 }}
                         className="text-xl text-text-muted max-w-2xl mx-auto mb-12 leading-relaxed"
                     >
-                        The future of work is collaborative. AI Productivity Copilot understands your documents, follows your voice, and manages your workflow using high-performance Amazon Nova models.
+                        The future of work is collaborative. Gemini Copilot understands your documents, follows your voice, and manages your workflow using high-performance Gemini models.
                     </motion.p>
 
                     <motion.div

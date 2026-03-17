@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect } from 'react';
 import { sendMessage as sendApiMessage, getHistory } from '../services/api';
 
 export const useChat = () => {
-    const defaultMessage = { role: 'assistant', content: 'Hello! I am your AI Productivity Copilot. How can I help you today?' };
+    const defaultMessage = { role: 'assistant', content: 'Hello! I am your Gemini Copilot. How can I help you today?' };
     const [messages, setMessages] = useState([defaultMessage]);
     const [loading, setLoading] = useState(false);
 

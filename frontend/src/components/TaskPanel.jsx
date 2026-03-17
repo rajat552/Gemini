@@ -56,7 +56,7 @@ const TaskPanel = ({ tasks = [], onRefetch }) => {
                     <div className="h-full flex flex-col items-center justify-center text-center p-12 opacity-30 border-2 border-dashed border-border-subtle rounded-3xl group hover:opacity-50 transition-all">
                         <Target size={56} className="mb-6 stroke-[1.5px] scale-110 group-hover:rotate-12 transition-transform" />
                         <h3 className="text-sm font-black text-text-main uppercase tracking-widest mb-2">No active strategy</h3>
-                        <p className="text-[11px] leading-relaxed italic">Ask Nova to analyze your documents or plan your next workflow steps logic.</p>
+                        <p className="text-[11px] leading-relaxed italic">Ask Gemini to analyze your documents or plan your next workflow steps logic.</p>
                     </div>
                 ) : (
                     tasks.map((task, idx) => (

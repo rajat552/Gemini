@@ -20,7 +20,7 @@ const Navbar = () => {
                     <Bot size={24} />
                 </div>
                 <div>
-                    <span className="text-xl font-black tracking-tight gradient-text">NOVA</span>
+                    <span className="text-xl font-black tracking-tight gradient-text">GEMINI</span>
                     <span className="text-[10px] block font-bold text-text-muted tracking-[0.2em] -mt-1 ml-1 uppercase">Copilot</span>
                 </div>
             </div>

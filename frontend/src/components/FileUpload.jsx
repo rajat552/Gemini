@@ -92,7 +92,7 @@ const FileUpload = ({ onAnalysisComplete }) => {
                                 />
                             </div>
                             <div className="flex justify-between text-[10px] text-gray-500 font-bold tracking-wider">
-                                <span>UPLOADING TO NOVA...</span>
+                                <span>UPLOADING TO GEMINI...</span>
                                 <span>{progress}%</span>
                             </div>
                         </div>

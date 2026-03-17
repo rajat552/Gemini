@@ -51,7 +51,9 @@ class GeminiService {
             }
             
         } catch (error) {
-            console.error("Gemini API Error:", error.message);
+            console.error("Gemini API Error (Message):", error.message);
+            console.error("Gemini API Error (Status):", error.status);
+            console.error("Gemini API Error (Full):", JSON.stringify(error, Object.getOwnPropertyNames(error)));
             
             // Check if it's a rate limit or quota exceeded error
             if (error.status === 429 || error.message.includes("429") || error.message.includes("Quota exceeded") || error.message.includes("quota")) {
