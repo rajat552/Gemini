@@ -54,7 +54,10 @@ const Home = () => {
                         >
                             Open Copilot <ChevronRight className="group-hover:translate-x-1 transition-transform" />
                         </button>
-                        <button className="px-10 py-5 bg-card-bg border border-border-subtle text-text-main rounded-2xl font-black text-lg hover:bg-white/10 transition-all shadow-sm">
+                        <button 
+                            onClick={() => window.open('https://www.youtube.com/watch?v=CCEqcZd7SkA', '_blank')}
+                            className="px-10 py-5 bg-card-bg border border-border-subtle text-text-main rounded-2xl font-black text-lg hover:bg-white/10 transition-all shadow-sm"
+                        >
                             Watch Demo
                         </button>
                     </motion.div>
